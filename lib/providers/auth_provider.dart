@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flood_detection/service/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -55,7 +54,7 @@ class AuthProvider extends ChangeNotifier {
       _errorMessage = _mapFirebaseAuthError(e);
       rethrow;
     } catch (e) {
-      _errorMessage = 'Gagal mendaftar. Silakan coba lagi.';
+      _errorMessage = 'Registration failed. Please try again.';
       rethrow;
     } finally {
       _isAuthenticating = false;
@@ -73,16 +72,16 @@ class AuthProvider extends ChangeNotifier {
       _errorMessage = _mapFirebaseAuthError(e);
 
       if (e.code == 'user-not-found') {
-        _errorMessage = 'Email belum terdaftar.';
+        _errorMessage = 'Email not registered yet.';
       }
 
       if (e.code == 'wrong-password') {
-        _errorMessage = 'Password salah.';
+        _errorMessage = 'Wrong password.';
       }
 
       rethrow;
     } catch (e) {
-      _errorMessage = 'Email atau password salah.';
+      _errorMessage = 'Incorrect email or password';
       rethrow;
     } finally {
       _isAuthenticating = false;
@@ -94,46 +93,36 @@ class AuthProvider extends ChangeNotifier {
     _isAuthenticating = true;
     notifyListeners();
 
-    _showLoadingDialog();
+    try {
+      await _auth.signOut();
 
-    await Future.delayed(const Duration(milliseconds: 700));
+      await Future.delayed(const Duration(milliseconds: 500));
 
-    _isAuthenticating = false;
-    notifyListeners();
+      _errorMessage = null;
+    } on Exception {
+      _errorMessage = 'Failed to log out. Please try again.';
+      rethrow;
+    } finally {
+      _isAuthenticating = false;
 
-    _closeDialog();
-  }
-
-  void _showLoadingDialog() {
-    final context = navigatorKey.currentState?.overlay?.context;
-    if (context == null) return;
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) =>
-          const Center(child: CircularProgressIndicator(color: Colors.white)),
-    );
-  }
-
-  void _closeDialog() {
-    navigatorKey.currentState?.pop();
+      notifyListeners();
+    }
   }
 
   String _mapFirebaseAuthError(FirebaseAuthException e) {
     switch (e.code) {
       case 'weak-password':
-        return 'Password yang diberikan terlalu lemah.';
+        return 'The password provided is too weak.';
       case 'email-already-in-use':
-        return 'Akun sudah ada untuk email tersebut.';
+        return 'An account already exists for the specified email address.';
       case 'user-not-found':
-        return 'Tidak ditemukan pengguna untuk email tersebut.';
+        return 'No user was found for the specified email address.';
       case 'wrong-password':
-        return 'Password salah.';
+        return 'The password is incorrect.';
       case 'invalid-email':
-        return 'Format email tidak valid.';
+        return 'The email format is invalid.';
       default:
-        return 'Autentikasi gagal. Silakan coba lagi.';
+        return 'Authentication failed. Please try again.';
     }
   }
 }

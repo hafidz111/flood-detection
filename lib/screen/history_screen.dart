@@ -5,8 +5,22 @@ import 'package:provider/provider.dart';
 import '../models/history_item.dart';
 import '../providers/history_provider.dart';
 
-class HistoryScreen extends StatelessWidget {
+class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
+
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HistoryProvider>(context, listen: false).fetchHistory();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +28,9 @@ class HistoryScreen extends StatelessWidget {
       builder: (context, historyProvider, child) {
         List<HistoryItem> historyList = historyProvider.history;
 
+        if (historyProvider.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
         if (historyList.isEmpty) {
           return const Center(child: Text('No history data available.'));
         }

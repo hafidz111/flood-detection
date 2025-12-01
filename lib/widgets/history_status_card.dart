@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HistoryStatusCard extends StatelessWidget {
-  final String date;
+  final DateTime date;
   final String status;
 
   const HistoryStatusCard({
@@ -23,10 +24,15 @@ class HistoryStatusCard extends StatelessWidget {
     }
   }
 
+  String _formatDate(DateTime date) {
+    return DateFormat('d MMMM yyyy').format(date.toLocal());
+  }
+
   @override
   Widget build(BuildContext context) {
     Color statusColor = _getStatusColor(status);
 
+    final formattedDate = _formatDate(date);
     const double fixedStatusWidth = 90.0;
 
     return Card(
@@ -38,7 +44,7 @@ class HistoryStatusCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(date, style: const TextStyle(fontSize: 16)),
+            Text(formattedDate, style: const TextStyle(fontSize: 16)),
 
             SizedBox(
               width: fixedStatusWidth,

@@ -18,6 +18,13 @@ class DashboardScreen extends StatelessWidget {
         const maxRainSensor = 500;
         const maxDistance = 500;
 
+        final bool isDataAvailable =
+            !(data.floodStatus == 'Connecting...' ||
+                data.floodStatus == 'Firestore Error' ||
+                data.floodStatus == 'No Document Found' ||
+                data.floodStatus == 'No Document Found (Timeout)' ||
+                data.floodStatus == 'Try Again');
+
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -66,18 +73,27 @@ class DashboardScreen extends StatelessWidget {
               const SizedBox(height: 30),
 
               ElevatedButton(
-                onPressed: () {
-                  Provider.of<HistoryProvider>(
-                    context,
-                    listen: false,
-                  ).addHistory(data.floodStatus);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('History Captured: ${data.floodStatus}'),
-                    ),
-                  );
-                },
+                onPressed: isDataAvailable
+                    ? () {
+                        Provider.of<HistoryProvider>(context, listen: false)
+                            .addHistory(data)
+                            .then((_) {
+                              if (!context.mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Successfully saved')),
+                              );
+                            })
+                            .catchError((error) {
+                              if (!context.mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Failed to save history'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            });
+                      }
+                    : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF004D7A),
                   foregroundColor: Colors.white,

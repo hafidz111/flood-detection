@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCEJSo7CF-v6I3gVwb8-ORLxDO5TcXayYw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>415084090304</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.floodDetection</string>
+	<key>PROJECT_ID</key>
+	<string>iot-praktikum-esp32-7febd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>iot-praktikum-esp32-7febd.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:415084090304:ios:b472b3edb3e36a21e52e25</string>
+	<key>DATABASE_URL</key>
+	<string>https://iot-praktikum-esp32-7febd-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

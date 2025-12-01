@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DonutChart extends StatelessWidget {
   final String title;
-  final int value;
+  final num value;
   final int maxValue;
   final Color color;
   final String unit;
