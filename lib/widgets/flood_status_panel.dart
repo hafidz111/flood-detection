@@ -5,43 +5,36 @@ class FloodStatusPanel extends StatelessWidget {
 
   const FloodStatusPanel({super.key, required this.status});
 
-  // Fungsi untuk mendapatkan warna status utama dan border gelap
   Map<String, Color> _getStatusColors(String status) {
     switch (status) {
       case 'Good':
         return {
           'fill': const Color(0xFF6CC551),
-          'border': const Color(0xFF4C9A36), // Hijau gelap
+          'border': const Color(0xFF4C9A36),
         };
       case 'Warning':
         return {
           'fill': const Color(0xFFFFAE42),
-          'border': const Color(0xFFD89230), // Kuning gelap
+          'border': const Color(0xFFD89230),
         };
       case 'Danger':
         return {
           'fill': const Color(0xFFFC5C65),
-          'border': const Color(0xFFD0444A), // Merah gelap
+          'border': const Color(0xFFD0444A),
         };
       default:
-        return {
-          'fill': Colors.grey,
-          'border': Colors.black54,
-        };
+        return {'fill': Colors.grey, 'border': Colors.black54};
     }
   }
 
-  // Fungsi pembantu untuk membuat kotak warna kecil (DIPERBARUI)
-  // Menerima warna fill, warna border, dan apakah kotak ini aktif
   Widget _colorBox({
-    required Color color, 
-    required Color borderColor, 
-    required bool isActive
+    required Color color,
+    required Color borderColor,
+    required bool isActive,
   }) {
-    // Tentukan border hanya jika isActive bernilai true
     final borderStyle = isActive
-        ? Border.all(color: borderColor, width: 3) // Border tebal (width 3)
-        : Border.all(color: Colors.transparent, width: 0); // Polos (tanpa border)
+        ? Border.all(color: borderColor, width: 5)
+        : Border.all(color: Colors.transparent, width: 0);
 
     return Expanded(
       child: Container(
@@ -57,12 +50,10 @@ class FloodStatusPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil data warna untuk status Good, Warning, dan Danger
     final goodColors = _getStatusColors('Good');
     final warningColors = _getStatusColors('Warning');
     final dangerColors = _getStatusColors('Danger');
-    
-    // Ambil warna fill untuk Container Teks Status
+
     final statusFillColor = _getStatusColors(status)['fill']!;
 
     const double cardPaddingHorizontal = 16.0;
@@ -86,26 +77,24 @@ class FloodStatusPanel extends StatelessWidget {
             ),
             const SizedBox(height: 15),
 
-            // KOTAK WARNA (ROW) - Menerapkan logika isActive
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
               child: Row(
                 children: [
-                  // Kotak Hijau: Aktif jika status == 'Good'
                   _colorBox(
                     color: goodColors['fill']!,
                     borderColor: goodColors['border']!,
                     isActive: status == 'Good',
                   ),
                   const SizedBox(width: 8),
-                  // Kotak Kuning: Aktif jika status == 'Warning'
+
                   _colorBox(
                     color: warningColors['fill']!,
                     borderColor: warningColors['border']!,
                     isActive: status == 'Warning',
                   ),
                   const SizedBox(width: 8),
-                  // Kotak Merah: Aktif jika status == 'Danger'
+
                   _colorBox(
                     color: dangerColors['fill']!,
                     borderColor: dangerColors['border']!,
@@ -114,10 +103,9 @@ class FloodStatusPanel extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 20),
 
-            // CONTAINER STATUS TEKS
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
