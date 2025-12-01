@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "415084090304",
+    "project_id": "iot-praktikum-esp32-7febd",
+    "storage_bucket": "iot-praktikum-esp32-7febd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415084090304:android:4d3faaae9a688a6ee52e25",
+        "android_client_info": {
+          "package_name": "com.example.flood_detection"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOa9JMU2wwSb6luLM10mHJCbsYXXXJn7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
