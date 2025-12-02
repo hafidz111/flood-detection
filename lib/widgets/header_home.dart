@@ -1,3 +1,4 @@
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'home_tab_item.dart';
@@ -6,17 +7,11 @@ import 'logout_button.dart';
 class HeaderHome extends StatelessWidget implements PreferredSizeWidget {
   final TabController tabController;
   final int currentIndex;
-  final Color activeColor;
-  final Color inactiveColor;
-  final Color unselectedLabelColor;
 
   const HeaderHome({
     super.key,
     required this.tabController,
     required this.currentIndex,
-    required this.activeColor,
-    required this.inactiveColor,
-    required this.unselectedLabelColor,
   });
 
   @override
@@ -24,7 +19,15 @@ class HeaderHome extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final Color activeColor = colorScheme.secondary;
+    final Color inactiveColor = colorScheme.primary;
+    final Color unselectedLabelColor =
+        FloodDetectionColors.textUnselected.color;
+        
     return AppBar(
+      backgroundColor: colorScheme.primary,
       title: Image.asset('assets/images/logo.png', height: 50),
       centerTitle: true,
       elevation: 0,

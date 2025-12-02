@@ -1,3 +1,4 @@
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flutter/material.dart';
 
 class DonutChart extends StatelessWidget {
@@ -8,12 +9,11 @@ class DonutChart extends StatelessWidget {
   final String unit;
 
   String _formatValue(num val) {
-        // Pindahkan fungsi _formatNumber ke dalam sini atau buat seperti ini
-        if ((val - val.toInt()).abs() < 1e-6) {
-            return val.toInt().toString();
-        }
-        return val.toStringAsFixed(1);
+    if ((val - val.toInt()).abs() < 1e-6) {
+      return val.toInt().toString();
     }
+    return val.toStringAsFixed(1);
+  }
 
   const DonutChart({
     super.key,
@@ -26,25 +26,26 @@ class DonutChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final formattedText = _formatValue(value);
     double percentage = value / maxValue;
     if (percentage > 1.0) percentage = 1.0;
 
-    final double strokeWidth = title.contains('Rain Sensor') ? 12 : 8;
+    final double strokeWidth = title.contains('Rain Sensor') ? 12 : 12;
 
-    final double valueFontSize = title.contains('Rain Sensor') ? 30 : 28;
+    final double valueFontSize = title.contains('Rain Sensor') ? 30 : 30;
 
     final bool isRainSensor = title.contains('Rain Sensor');
 
     final Color valueColor = isRainSensor
-        ? const Color(0xFF900000)
-        : const Color(0xFF00798C);
+        ? FloodDetectionColors.indicatorRainSensor.color
+        : FloodDetectionColors.indicatorTemperature.color;
 
     final Color unitColor = valueColor;
+
     return Expanded(
       child: Card(
         elevation: 2,
-
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -52,9 +53,10 @@ class DonutChart extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 10),
@@ -67,7 +69,7 @@ class DonutChart extends StatelessWidget {
                     child: CircularProgressIndicator(
                       value: percentage,
                       strokeWidth: strokeWidth,
-                      backgroundColor: Colors.grey[200],
+                      backgroundColor: FloodDetectionColors.disable.color,
                       valueColor: AlwaysStoppedAnimation<Color>(color),
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flutter/material.dart';
 
 class AuthInputField extends StatefulWidget {
@@ -31,15 +32,17 @@ class _AuthInputFieldState extends State<AuthInputField> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return TextFormField(
       controller: widget.controller,
       obscureText: widget.obscureText ? _obscure : false,
       keyboardType: widget.keyboardType,
       validator: widget.validator,
-      style: const TextStyle(color: Colors.black),
+      style: TextStyle(color: colorScheme.onSurface),
       decoration: InputDecoration(
         hintText: widget.hintText,
-        fillColor: Colors.white,
+        fillColor: colorScheme.surface,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -54,7 +57,7 @@ class _AuthInputFieldState extends State<AuthInputField> {
             ? IconButton(
                 icon: Icon(
                   _obscure ? Icons.visibility_off : Icons.visibility,
-                  color: Colors.grey,
+                  color: FloodDetectionColors.disable.color,
                 ),
                 onPressed: () {
                   setState(() {
@@ -64,8 +67,8 @@ class _AuthInputFieldState extends State<AuthInputField> {
               )
             : null,
 
-        errorStyle: const TextStyle(
-          color: Colors.redAccent,
+        errorStyle: TextStyle(
+          color: FloodDetectionColors.statusFailed.color,
           fontWeight: FontWeight.bold,
         ),
       ),

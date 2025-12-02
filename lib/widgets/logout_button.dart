@@ -9,9 +9,10 @@ class LogoutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return IconButton(
-      icon: const Icon(Icons.logout, color: Colors.white),
+      icon: Icon(Icons.logout, color: colorScheme.onPrimary),
       onPressed: auth.isAuthenticating ? null : () => auth.logout(),
       tooltip: "Logout",
     );

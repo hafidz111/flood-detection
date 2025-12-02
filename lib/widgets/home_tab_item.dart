@@ -18,6 +18,7 @@ class HomeTabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       decoration: BoxDecoration(
         color: isSelected ? activeColor : inactiveColor,
@@ -27,8 +28,9 @@ class HomeTabItem extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            color: isSelected ? Colors.white : unselectedLabelColor,
+            color: isSelected ? colorScheme.onPrimary : unselectedLabelColor,
             fontWeight: FontWeight.bold,
+            fontSize: 16
           ),
         ),
       ),

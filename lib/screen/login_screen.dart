@@ -1,5 +1,6 @@
 import 'package:flood_detection/providers/auth_provider.dart';
 import 'package:flood_detection/screen/register_screen.dart';
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flood_detection/widgets/auth_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(auth.errorMessage ?? 'Login gagal'),
-            backgroundColor: Colors.red,
+            backgroundColor: FloodDetectionColors.statusFailed.color,
           ),
         );
       }
@@ -43,11 +44,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = FloodDetectionColors.backgroundDark.color;
 
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: const Color(0xFF132A3B),
+          backgroundColor: backgroundColor,
           body: Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
@@ -61,55 +64,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       passwordController: password,
                       onSubmit: _login,
                       isRegisterMode: false,
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  Row(
-                    children: const [
-                      Expanded(child: Divider(color: Colors.white54)),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          'Belum Punya Akun?',
-                          style: TextStyle(color: Colors.white54),
-                        ),
-                      ),
-                      Expanded(child: Divider(color: Colors.white54)),
-                    ],
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: authProvider.isAuthenticating
-                          ? null
-                          : () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => const RegisterScreen(),
-                                ),
-                              );
-                            },
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: const Color(0xFF007B9A),
-                        foregroundColor: Colors.white,
-                        side: BorderSide.none,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text(
-                        'Daftar',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      onSecondaryButtonTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const RegisterScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -121,10 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
           Positioned.fill(
             child: Container(
               color: const Color.fromRGBO(0, 0, 0, 0.55),
-              child: const Center(
+              child: Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 4,
-                  color: Colors.white,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),

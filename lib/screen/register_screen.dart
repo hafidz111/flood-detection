@@ -1,4 +1,5 @@
 import 'package:flood_detection/providers/auth_provider.dart';
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flood_detection/widgets/auth_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Registrasi berhasil! Silakan login.")),
+          SnackBar(
+            content: Text("Registrasi berhasil! Silakan login."),
+            backgroundColor: FloodDetectionColors.statusSuccess.color,
+          ),
         );
         Navigator.pop(context);
       } catch (e) {
@@ -41,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(auth.errorMessage ?? "Pendaftaran gagal"),
-            backgroundColor: Colors.red,
+            backgroundColor: FloodDetectionColors.statusFailed.color,
           ),
         );
       }
@@ -51,19 +55,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = FloodDetectionColors.backgroundDark.color;
 
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: const Color(0xFF132A3B),
+          backgroundColor: backgroundColor,
           appBar: AppBar(
-            title: const Text(
+            title: Text(
               "Daftar Akun",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: colorScheme.onPrimary),
             ),
-            backgroundColor: const Color(0xFF132A3B),
+            backgroundColor: backgroundColor,
             elevation: 0,
-            iconTheme: const IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: colorScheme.onPrimary),
           ),
           body: Center(
             child: SingleChildScrollView(
@@ -86,10 +92,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Positioned.fill(
             child: Container(
               color: Color.fromRGBO(0, 0, 0, 0.55),
-              child: const Center(
+              child: Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 4,
-                  color: Colors.white,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),

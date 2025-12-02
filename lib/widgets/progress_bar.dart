@@ -1,3 +1,4 @@
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -17,6 +18,7 @@ class ProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double percentage = value / maxValue;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Card(
       elevation: 2,
@@ -32,16 +34,17 @@ class ProgressBar extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface
                   ),
                 ),
 
                 Text(
                   '$value/$maxValue',
 
-                  style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 16,),
                 ),
               ],
             ),
@@ -50,7 +53,7 @@ class ProgressBar extends StatelessWidget {
             LinearProgressIndicator(
               value: percentage,
               minHeight: 10,
-              backgroundColor: Colors.grey[300],
+              backgroundColor: FloodDetectionColors.disable.color,
               valueColor: AlwaysStoppedAnimation<Color>(color),
 
               borderRadius: BorderRadius.circular(5),

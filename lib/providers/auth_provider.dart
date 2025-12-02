@@ -95,16 +95,12 @@ class AuthProvider extends ChangeNotifier {
 
     try {
       await _auth.signOut();
-
-      await Future.delayed(const Duration(milliseconds: 500));
-
       _errorMessage = null;
     } on Exception {
       _errorMessage = 'Failed to log out. Please try again.';
       rethrow;
     } finally {
       _isAuthenticating = false;
-
       notifyListeners();
     }
   }

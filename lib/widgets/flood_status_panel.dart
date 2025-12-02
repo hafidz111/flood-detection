@@ -1,3 +1,4 @@
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flutter/material.dart';
 
 class FloodStatusPanel extends StatelessWidget {
@@ -9,21 +10,24 @@ class FloodStatusPanel extends StatelessWidget {
     switch (status) {
       case 'Good':
         return {
-          'fill': const Color(0xFF6CC551),
-          'border': const Color(0xFF4C9A36),
+          'fill': FloodDetectionColors.floodStatusGood.color,
+          'border': FloodDetectionColors.borderGood.color,
         };
       case 'Warning':
         return {
-          'fill': const Color(0xFFFFAE42),
-          'border': const Color(0xFFD89230),
+          'fill': FloodDetectionColors.floodStatusWarning.color,
+          'border': FloodDetectionColors.borderWarning.color,
         };
       case 'Danger':
         return {
-          'fill': const Color(0xFFFC5C65),
-          'border': const Color(0xFFD0444A),
+          'fill': FloodDetectionColors.floodStatusDanger.color,
+          'border': FloodDetectionColors.borderDanger.color,
         };
       default:
-        return {'fill': Colors.grey, 'border': Colors.black54};
+        return {
+          'fill': FloodDetectionColors.disableButton.color,
+          'border': Colors.transparent,
+        };
     }
   }
 
@@ -50,11 +54,16 @@ class FloodStatusPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final goodColors = _getStatusColors('Good');
     final warningColors = _getStatusColors('Warning');
     final dangerColors = _getStatusColors('Danger');
 
     final statusFillColor = _getStatusColors(status)['fill']!;
+
+    final statusTextColor = statusFillColor.computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
 
     const double cardPaddingHorizontal = 16.0;
 
@@ -67,12 +76,12 @@ class FloodStatusPanel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Flood Status',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 15),
@@ -116,8 +125,8 @@ class FloodStatusPanel extends StatelessWidget {
               child: Text(
                 status,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: statusTextColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),

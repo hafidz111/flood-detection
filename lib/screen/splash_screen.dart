@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flood_detection/widgets/logo_header.dart';
 import 'package:flutter/material.dart';
 
@@ -48,8 +49,10 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final Color backgroundColor = FloodDetectionColors.backgroundDark.color;
+    
     return Scaffold(
-      backgroundColor: const Color(0xFF132A3B),
+      backgroundColor: backgroundColor,
       body: Center(
         child: FadeTransition(
           opacity: _fadeAnimation,

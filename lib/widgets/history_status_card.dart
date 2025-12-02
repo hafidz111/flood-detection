@@ -1,3 +1,4 @@
+import 'package:flood_detection/style/colors/flood_detection_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -14,13 +15,13 @@ class HistoryStatusCard extends StatelessWidget {
   Color _getStatusColor(String status) {
     switch (status) {
       case 'Good':
-        return Colors.lightGreen;
+        return FloodDetectionColors.statusSuccess.color;
       case 'Warning':
-        return Colors.amber[700]!;
+        return FloodDetectionColors.statusWarning.color;
       case 'Danger':
-        return Colors.red[700]!;
+        return FloodDetectionColors.statusFailed.color;
       default:
-        return Colors.grey;
+        return FloodDetectionColors.disable.color;
     }
   }
 
@@ -31,6 +32,7 @@ class HistoryStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color statusColor = _getStatusColor(status);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     final formattedDate = _formatDate(date);
     const double fixedStatusWidth = 90.0;
@@ -40,11 +42,11 @@ class HistoryStatusCard extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(formattedDate, style: const TextStyle(fontSize: 16)),
+            Text(formattedDate, style: TextStyle(fontSize: 16, color: colorScheme.onSurface)),
 
             SizedBox(
               width: fixedStatusWidth,
@@ -61,9 +63,7 @@ class HistoryStatusCard extends StatelessWidget {
                 child: Text(
                   status,
                   style: TextStyle(
-                    color: (status == 'Good' || status == 'Warning')
-                        ? Colors.black
-                        : Colors.white,
+                    color: FloodDetectionColors.textWhite.color,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),

@@ -18,10 +18,6 @@ class _HomeScreenState extends State<HomeScreen>
   late TabController _tabController;
   int _currentIndex = 0;
 
-  final activeTabColor = const Color(0xFF007B9A);
-  final inactiveTabColor = const Color(0xFF004D7A);
-  final unselectedLabelColor = const Color(0xFFB3C5D0);
-
   @override
   void initState() {
     super.initState();
@@ -42,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthProvider>(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Stack(
       children: [
@@ -49,9 +46,6 @@ class _HomeScreenState extends State<HomeScreen>
           appBar: HeaderHome(
             tabController: _tabController,
             currentIndex: _currentIndex,
-            activeColor: activeTabColor,
-            inactiveColor: inactiveTabColor,
-            unselectedLabelColor: unselectedLabelColor,
           ),
           body: TabBarView(
             controller: _tabController,
@@ -62,10 +56,10 @@ class _HomeScreenState extends State<HomeScreen>
         if (auth.isAuthenticating)
           Container(
             color: Colors.black45,
-            child: const Center(
+            child: Center(
               child: CircularProgressIndicator(
                 strokeWidth: 3,
-                color: Colors.white,
+                color: colorScheme.onPrimary,
               ),
             ),
           ),
