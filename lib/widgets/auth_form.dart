@@ -55,7 +55,7 @@ class AuthForm extends StatelessWidget {
         if (isRegisterMode)
           AuthInputField(
             controller: confirmPasswordController!,
-            hintText: 'Konfirmasi Password',
+            hintText: 'Confirm Password',
             obscureText: true,
             validator: (value) => ValidatorUtil.confirmPasswordValidator(
               value,
@@ -91,36 +91,27 @@ class AuthForm extends StatelessWidget {
         if (!isRegisterMode)
           Row(
             children: [
-              Expanded(
-                child: Divider(
-                  color: colorScheme.surface,
-                ),
-              ),
+              Expanded(child: Divider(color: colorScheme.surface)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-                  'Belum Punya Akun?',
-                  style: TextStyle(
-                    color: colorScheme.surface,
-                  ),
+                  'Don\'t Have an Account?',
+                  style: TextStyle(color: colorScheme.surface),
                 ),
               ),
-              Expanded(
-                child: Divider(
-                  color: colorScheme.surface,
-                ),
-              ),
+              Expanded(child: Divider(color: colorScheme.surface)),
             ],
           ),
 
-        if (!isRegisterMode)
-          const SizedBox(height: 24),
+        if (!isRegisterMode) const SizedBox(height: 24),
 
         if (!isRegisterMode && onSecondaryButtonTap != null)
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: authProvider.isAuthenticating ? null : onSecondaryButtonTap,
+              onPressed: authProvider.isAuthenticating
+                  ? null
+                  : onSecondaryButtonTap,
               style: ElevatedButton.styleFrom(
                 backgroundColor: colorScheme.surface,
                 side: BorderSide(color: colorScheme.primary, width: 2),
@@ -131,7 +122,7 @@ class AuthForm extends StatelessWidget {
                 ),
               ),
               child: Text(
-                "Daftar",
+                "Sign Up",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

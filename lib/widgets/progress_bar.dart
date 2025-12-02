@@ -22,7 +22,6 @@ class ProgressBar extends StatelessWidget {
 
     return Card(
       elevation: 2,
-
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -37,17 +36,22 @@ class ProgressBar extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface
+                    color: colorScheme.onSurface,
                   ),
                 ),
 
                 Text(
                   '$value/$maxValue',
 
-                  style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 16,),
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ],
             ),
+
             const SizedBox(height: 5),
 
             LinearProgressIndicator(

@@ -46,7 +46,10 @@ class HistoryStatusCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(formattedDate, style: TextStyle(fontSize: 16, color: colorScheme.onSurface)),
+            Text(
+              formattedDate,
+              style: TextStyle(fontSize: 16, color: colorScheme.onSurface),
+            ),
 
             SizedBox(
               width: fixedStatusWidth,

@@ -35,7 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Registrasi berhasil! Silakan login."),
+            content: Text("Sign up successful! Please log in."),
             backgroundColor: FloodDetectionColors.statusSuccess.color,
           ),
         );
@@ -44,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(auth.errorMessage ?? "Pendaftaran gagal"),
+            content: Text(auth.errorMessage ?? "Sign Up failed"),
             backgroundColor: FloodDetectionColors.statusFailed.color,
           ),
         );
@@ -64,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: backgroundColor,
           appBar: AppBar(
             title: Text(
-              "Daftar Akun",
+              "Sign Up",
               style: TextStyle(color: colorScheme.onPrimary),
             ),
             backgroundColor: backgroundColor,
@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Form(
                 key: _formKey,
                 child: AuthForm(
-                  title: "Daftar Sekarang",
+                  title: "Sign Up Now",
                   emailController: email,
                   passwordController: password,
                   confirmPasswordController: confirmPassword,

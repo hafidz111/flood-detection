@@ -30,7 +30,7 @@ class HomeTabItem extends StatelessWidget {
           style: TextStyle(
             color: isSelected ? colorScheme.onPrimary : unselectedLabelColor,
             fontWeight: FontWeight.bold,
-            fontSize: 16
+            fontSize: 16,
           ),
         ),
       ),

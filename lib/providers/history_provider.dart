@@ -85,10 +85,8 @@ class HistoryProvider with ChangeNotifier {
       'humidity': sensorData.humidity,
       'rainsensorvalue': sensorData.rainSensorValue,
       'temperature': sensorData.temperature,
-
       'sensor_id': sensorData.sensorId,
       'location': sensorData.location,
-
       'timestamp': now.toIso8601String(),
     };
 

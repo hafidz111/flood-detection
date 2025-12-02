@@ -25,7 +25,7 @@ class HeaderHome extends StatelessWidget implements PreferredSizeWidget {
     final Color inactiveColor = colorScheme.primary;
     final Color unselectedLabelColor =
         FloodDetectionColors.textUnselected.color;
-        
+
     return AppBar(
       backgroundColor: colorScheme.primary,
       title: Image.asset('assets/images/logo.png', height: 50),

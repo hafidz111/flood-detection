@@ -45,7 +45,7 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   FloodStatusPanel(status: data.floodStatus),
-            
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -65,27 +65,27 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-            
+
                   const SizedBox(height: 20),
-            
+
                   ProgressBar(
                     title: 'Humidity (%)',
                     value: data.humidity,
                     maxValue: 100,
                     color: FloodDetectionColors.indicatorHumidity.color,
                   ),
-            
+
                   const SizedBox(height: 10),
-            
+
                   ProgressBar(
                     title: 'Distance (CM)',
                     value: data.distance,
                     maxValue: maxDistance,
                     color: FloodDetectionColors.indicatorDistance.color,
                   ),
-            
+
                   const SizedBox(height: 30),
-            
+
                   ElevatedButton(
                     onPressed: isDataAvailable
                         ? () {
@@ -94,8 +94,12 @@ class DashboardScreen extends StatelessWidget {
                                 .then((_) {
                                   if (!context.mounted) return;
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Successfully saved'),
-                                    backgroundColor: FloodDetectionColors.statusSuccess.color),
+                                    SnackBar(
+                                      content: Text('Successfully saved'),
+                                      backgroundColor: FloodDetectionColors
+                                          .statusSuccess
+                                          .color,
+                                    ),
                                   );
                                 })
                                 .catchError((error) {
@@ -103,7 +107,9 @@ class DashboardScreen extends StatelessWidget {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text('Failed to save history'),
-                                      backgroundColor: FloodDetectionColors.statusFailed.color,
+                                      backgroundColor: FloodDetectionColors
+                                          .statusFailed
+                                          .color,
                                     ),
                                   );
                                 });
@@ -111,9 +117,11 @@ class DashboardScreen extends StatelessWidget {
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorScheme.primary,
-                      disabledBackgroundColor: FloodDetectionColors.disableButton.color,
+                      disabledBackgroundColor:
+                          FloodDetectionColors.disableButton.color,
                       foregroundColor: colorScheme.onPrimary,
-                      disabledForegroundColor: FloodDetectionColors.disable.color,
+                      disabledForegroundColor:
+                          FloodDetectionColors.disable.color,
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -121,7 +129,10 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     child: const Text(
                       'Capture History',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

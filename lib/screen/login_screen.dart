@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(auth.errorMessage ?? 'Login gagal'),
+            content: Text(auth.errorMessage ?? 'Sign in failed'),
             backgroundColor: FloodDetectionColors.statusFailed.color,
           ),
         );
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Form(
                     key: _formKey,
                     child: AuthForm(
-                      title: "Login",
+                      title: "Sign In",
                       emailController: email,
                       passwordController: password,
                       onSubmit: _login,

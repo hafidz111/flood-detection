@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     final Color backgroundColor = FloodDetectionColors.backgroundDark.color;
-    
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Center(
